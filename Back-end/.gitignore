@@ -1,0 +1,7 @@
+# Ignorar el archivo de variables de entorno
+variables.env
+
+# Otros archivos y directorios a ignorar
+__pycache__/
+*.pyc
+.env
