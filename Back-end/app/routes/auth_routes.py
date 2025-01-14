@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import db, User
+import jwt
+import datetime
 
 auth = Blueprint('auth', __name__)
 
@@ -19,4 +21,10 @@ def login():
     user = User.query.filter_by(email=data['email']).first()
     if not user or not check_password_hash(user.password, data['password']):
         return jsonify({"message": "Login failed!"}), 401
-    return jsonify({"message": "Login successful!"})
+    
+    token = jwt.encode({
+        'user_id': user.id,
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+    }, 'secret_key', algorithm='HS256')
+    
+    return jsonify({"token": token})

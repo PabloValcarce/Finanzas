@@ -3,5 +3,5 @@ from flask import Blueprint, jsonify
 main = Blueprint('main', __name__)
 
 @main.route('/')
-def home():
-    return jsonify({"message": "¡Bienvenido al Gestor Financiero!"})
+def index():
+    return jsonify({"message": "Welcome to the main route!"})
