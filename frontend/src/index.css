@@ -1,8 +1,3 @@
-/* Reset CSS */
-
-
-
-
 * {
     margin: 0;
     padding: 0;
@@ -10,17 +5,16 @@
 }
 
 :root {
-    --primary-color: #1e90ff; /* Azul */
-    --secondary-color: #4682B4; /* Azul más claro */
-    --tertiary-color:#87CEFA;
-    --button-color:#FF4500;
-    --button-hover-color:#FF6347;
+    --primary-color: #1B3A57; /* Azul más oscuro */
+    --secondary-color: #1A5A8F; /* Azul más oscuro */
+    --tertiary-color: #87CEFA; /* Azul más claro */
+    --button-color: #FF4500; /* Color del botón */
+    --button-hover-color: #FF6347; /* Color del botón al pasar el ratón */
     --text-color: white;
-    --background-color: #f0f0f0;
-    --box-shadow-color: rgba(0, 0, 0, 0.1);
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 body {
-    font-family: Arial, sans-serif;
-    background-color: #1e90ff;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background-color: var(--secondary-color); /* Usar variable */
 }

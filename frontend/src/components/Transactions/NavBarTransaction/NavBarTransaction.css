@@ -1,0 +1,103 @@
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color); /* Usar variable */
+    margin: 4px 0;
+}
+
+
+
+.navbar-transaction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--primary-color); /* Usar variable */
+    color: var(--text-color); /* Usar variable */
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.navbar-transaction-brand {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.navbar-transaction-menu {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-transaction-item {
+    color: var(--text-color); /* Usar variable */
+    text-decoration: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.navbar-transaction-item:hover {
+    transform: scale(1.05);
+    font-weight: 500;
+}
+
+.hamburger-transaction {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger-transaction .bar-transaction {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 4px 0;
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.logout-button:hover {
+    text-decoration: underline;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .navbar-transaction-menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        position: absolute;
+        top: 50px; /* Ajustar según la altura del navbar */
+        left: 0;
+        background-color: var(--primary-color); /* Usar variable */
+        z-index: 999; /* Asegurarse de que el menú esté por encima del fondo */
+        padding: 10px 20px;
+    }
+
+    .navbar-transaction-menu.open {
+        display: flex;
+    }
+
+    .hamburger-transaction {
+        display: flex;
+    }
+}
