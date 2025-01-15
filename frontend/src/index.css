@@ -1,0 +1,26 @@
+/* Reset CSS */
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #1e90ff; /* Azul */
+    --secondary-color: #4682B4; /* Azul más claro */
+    --tertiary-color:#87CEFA;
+    --button-color:#FF4500;
+    --button-hover-color:#FF6347;
+    --text-color: white;
+    --background-color: #f0f0f0;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e90ff;
+}
