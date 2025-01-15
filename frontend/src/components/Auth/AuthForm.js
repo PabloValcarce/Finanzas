@@ -5,14 +5,39 @@ import Swal from 'sweetalert2';
 import './AuthForm.css';
 
 function AuthForm() {
-    const [isRegister, setIsRegister] = useState(false);
+    const [isRegister, setIsRegister] = useState(false); // Mostrar el formulario de inicio de sesión por defecto
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [emailError, setEmailError] = useState('');
     const navigate = useNavigate();
+
+    const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    };
+
+    const handleEmailChange = (e) => {
+        const emailValue = e.target.value;
+        setEmail(emailValue);
+        validateAndSetEmailError(emailValue);
+    };
+
+    const validateAndSetEmailError = (email) => {
+        if (!validateEmail(email)) {
+            setEmailError('Invalid email address');
+        } else {
+            setEmailError('');
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!validateEmail(email)) {
+            setEmailError('Invalid email address');
+            return;
+        }
+        setEmailError('');
         try {
             const endpoint = isRegister ? '/auth/register' : '/auth/login';
             const data = isRegister ? { name, email, password } : { email, password };
@@ -35,8 +60,15 @@ function AuthForm() {
             }
         } catch (error) {
             console.error(error);
+            Swal.fire({
+                title: 'Error!',
+                text: 'Incorrect email or password!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         }
     };
+
     return (
         <div className="auth-form">
             <h1>{isRegister ? 'Register' : 'Login'}</h1>
@@ -53,8 +85,10 @@ function AuthForm() {
                     type="email"
                     placeholder="Email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={handleEmailChange}
+                    className={emailError ? 'error-border' : ''}
                 />
+                {emailError && <p className="error">{emailError}</p>}
                 <input
                     type="password"
                     placeholder="Password"
@@ -69,4 +103,5 @@ function AuthForm() {
         </div>
     );
 }
+
 export default AuthForm;

@@ -19,7 +19,6 @@
 .auth-form input {
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 5px;
 }
 
@@ -37,4 +36,13 @@
 
 .auth-form button:hover {
     background-color:var(--button-hover-color);
+}
+.auth-form input.error-border {
+    border-color: red; /* Cambiar el color del borde cuando hay un error */
+}
+.error {
+    color: red;
+    font-size: 0.85em;
+    margin-top: -10px;
+    margin-bottom: 10px;
 }
