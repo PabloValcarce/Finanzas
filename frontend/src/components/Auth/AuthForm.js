@@ -42,7 +42,6 @@ function AuthForm() {
             const endpoint = isRegister ? '/auth/register' : '/auth/login';
             const data = isRegister ? { name, email, password } : { email, password };
             const response = await api.post(endpoint, data);
-            console.log(response.data);
             if (isRegister) {
                 Swal.fire({
                     title: 'Success!',
@@ -54,9 +53,21 @@ function AuthForm() {
                 setEmail('');
                 setPassword('');
             } else {
-                const token = response.data.token; // Suponiendo que el token se devuelve en la respuesta
-                localStorage.setItem('token', token);
-                navigate('/transactions'); // Redirigir a la página de transacciones después de un inicio de sesión exitoso
+                // Asegúrate de que la respuesta contiene el token
+             if (response.data.token) {
+                const token = response.data.token;
+                localStorage.setItem('token', token);  // Guarda el token en localStorage
+
+                // Si el token se ha guardado correctamente, navega a /transactions
+                navigate('/transactions');
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Login failed, no token received!',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
             }
         } catch (error) {
             console.error(error);

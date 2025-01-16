@@ -1,6 +1,6 @@
 import React from 'react';
 import Swal from 'sweetalert2';
-import axios from 'axios';
+import api from '../../../services/api';
 
 const AddTransaction = ({ userId, onTransactionAdded }) => {
     const handleAddTransaction = async () => {
@@ -21,12 +21,17 @@ const AddTransaction = ({ userId, onTransactionAdded }) => {
         if (formValues) {
             const [description, amount] = formValues;
             try {
-                const response = await axios.post('/transactions', {
-                    userId,
+                await api.post('/api/transactions', {
                     description,
                     amount,
+                    user_id: userId
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`, // Asegúrate de enviar el token
+                    },
                 });
-                onTransactionAdded(response.data);
+                onTransactionAdded();
                 Swal.fire('Success', 'Transaction added successfully!', 'success');
             } catch (error) {
                 Swal.fire('Error', 'Failed to add transaction.', 'error');

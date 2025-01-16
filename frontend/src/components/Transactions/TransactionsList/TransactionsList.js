@@ -1,22 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import api from '../../../services/api'; // Asegúrate de que el módulo api esté importado correctamente
+import React from 'react';
 
-function TransactionsList() {
-    const [transactions, setTransactions] = useState([]);
-
-    useEffect(() => {
-        const fetchTransactions = async () => {
-            try {
-                const response = await api.get('/transactions');
-                setTransactions(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchTransactions();
-    }, []);
-
+function TransactionsList({ transactions }) {
     return (
         <div className="transactions-container">
             <h1>Transactions</h1>

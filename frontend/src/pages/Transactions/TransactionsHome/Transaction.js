@@ -3,27 +3,31 @@ import NavBarTransaction from '../../../components/Transactions/NavBarTransactio
 import './Transaction.css'; 
 import TransactionsList from '../../../components/Transactions/TransactionsList/TransactionsList';
 import AddTransaction from '../../../components/Transactions/AddTransaction/AddTransaction';
-import axios from 'axios';
+import api from '../../../services/api';
 
 function Transaction() {
     const [transactions, setTransactions] = useState([]);
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId'); // Obtienes el ID del usuario del localStorage
+
+    const fetchTransactions = async () => {
+        try {
+            const response = await api.get('/api/transactions', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Envío el token en el encabezado
+                },
+            });
+            setTransactions(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     useEffect(() => {
-        const fetchTransactions = async () => {
-            try {
-                const response = await axios.get('/transactions');
-                setTransactions(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchTransactions();
+        fetchTransactions(); 
     }, []);
 
-    const handleTransactionAdded = (newTransaction) => {
-        setTransactions([...transactions, newTransaction]);
+    const handleTransactionAdded = async () => {
+        await fetchTransactions(); 
     };
 
     return (

@@ -1,15 +1,15 @@
 from flask import Blueprint, request, jsonify
 from app.models import db, Transaction
-from app.middleware import token_required
+from app.middleware import token_required 
 
 transactions = Blueprint('transactions', __name__)
 
 @transactions.route('/transactions', methods=['GET', 'POST'])
-@token_required
-def handle_transactions(current_user_id):
+@token_required  
+def handle_transactions(current_user):
     if request.method == 'GET':
-        # Manejar solicitudes GET
-        transactions = Transaction.query.filter_by(user_id=current_user_id).all()
+        
+        transactions = Transaction.query.filter_by(user_id=current_user.id).all()
         return jsonify([{
             'id': transaction.id,
             'description': transaction.description,
@@ -18,12 +18,12 @@ def handle_transactions(current_user_id):
         } for transaction in transactions])
     
     if request.method == 'POST':
-        # Manejar solicitudes POST
+        # Crear una nueva transacción
         data = request.get_json()
         new_transaction = Transaction(
             description=data['description'],
             amount=data['amount'],
-            user_id=current_user_id
+            user_id=current_user.id  # Usamos el current_user, no solo el id
         )
         db.session.add(new_transaction)
         db.session.commit()
@@ -36,10 +36,10 @@ def handle_transactions(current_user_id):
 
 @transactions.route('/transactions/<int:id>', methods=['PUT'])
 @token_required
-def update_transaction(current_user_id, id):
+def update_transaction(current_user, id):
     data = request.get_json()
     transaction = Transaction.query.get(id)
-    if not transaction or transaction.user_id != current_user_id:
+    if not transaction or transaction.user_id != current_user.id:
         return jsonify({'message': 'Transaction not found or not authorized'}), 404
     transaction.description = data['description']
     transaction.amount = data['amount']
@@ -53,9 +53,9 @@ def update_transaction(current_user_id, id):
 
 @transactions.route('/transactions/<int:id>', methods=['DELETE'])
 @token_required
-def delete_transaction(current_user_id, id):
+def delete_transaction(current_user, id):
     transaction = Transaction.query.get(id)
-    if not transaction or transaction.user_id != current_user_id:
+    if not transaction or transaction.user_id != current_user.id:
         return jsonify({'message': 'Transaction not found or not authorized'}), 404
     db.session.delete(transaction)
     db.session.commit()
