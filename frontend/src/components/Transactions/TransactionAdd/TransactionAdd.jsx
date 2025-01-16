@@ -1,8 +1,12 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import api from '../../../services/api';
+import { useTransactions } from '../../../context/TransactionContext';
 
 const AddTransaction = ({ userId, onTransactionAdded }) => {
+
+    const{addTransaction} = useTransactions();
+
     const handleAddTransaction = async () => {
         const { value: formValues } = await Swal.fire({
             title: 'Add Transaction',

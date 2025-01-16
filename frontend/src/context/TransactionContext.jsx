@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import api from '../services/api';
 
 // Crear el contexto
 const TransactionsContext = createContext();
@@ -12,8 +13,22 @@ export const TransactionsProvider = ({ children }) => {
         setTransactions(newTransactions);
     };
 
+    // Método para cargar las transacciones desde la API
+    const loadTransactions = async () => {
+        try {
+            const response = await api.get('/api/transactions', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Envío el token en el encabezado
+                },
+            });
+            setTransactions(response.data);
+        } catch (error) {
+            console.error('Failed to load transactions:', error);
+        }
+    };
+
     return (
-        <TransactionsContext.Provider value={{ transactions, updateTransactions }}>
+        <TransactionsContext.Provider value={{ transactions, updateTransactions, loadTransactions }}>
             {children}
         </TransactionsContext.Provider>
     );

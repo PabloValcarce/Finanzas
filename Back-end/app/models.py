@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime, timezone
 
 db = SQLAlchemy()
 
@@ -14,3 +15,4 @@ class Transaction(db.Model):
     amount = db.Column(db.Float, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('transactions', lazy=True))
+    date = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)

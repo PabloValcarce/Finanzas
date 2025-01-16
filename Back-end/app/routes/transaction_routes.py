@@ -8,13 +8,13 @@ transactions = Blueprint('transactions', __name__)
 @token_required  
 def handle_transactions(current_user):
     if request.method == 'GET':
-        
         transactions = Transaction.query.filter_by(user_id=current_user.id).all()
         return jsonify([{
             'id': transaction.id,
             'description': transaction.description,
             'amount': transaction.amount,
-            'user_id': transaction.user_id
+            'user_id': transaction.user_id,
+            'date': transaction.date
         } for transaction in transactions])
     
     if request.method == 'POST':
@@ -31,7 +31,8 @@ def handle_transactions(current_user):
             'id': new_transaction.id,
             'description': new_transaction.description,
             'amount': new_transaction.amount,
-            'user_id': new_transaction.user_id
+            'user_id': new_transaction.user_id,
+            'date': new_transaction.date  # Asegúrate de incluir el campo 'date' si es necesario
         })
 
 @transactions.route('/transactions/<int:id>', methods=['PUT'])
