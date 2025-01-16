@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import './NavBarTransaction.css';
+import './TransactionNavBar.css';
 
 const NavBarTransaction = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,8 +23,8 @@ const NavBarTransaction = () => {
                 Finanzas
             </div>
             <div className={`navbar-transaction-menu ${isMenuOpen ? 'open' : ''}`}>
-                <Link to="/inversion" className="navbar-transaction-item">Inversion</Link>
-                <Link to="/ahorro" className="navbar-transaction-item">Ahorro</Link>
+                <Link to="/investment" className="navbar-transaction-item">Inversion</Link>
+                <Link to="/savings" className="navbar-transaction-item">Ahorro</Link>
                 <Link to="/estadisticas" className="navbar-transaction-item">Estadísticas</Link>
                 <Link to="/gestion" className="navbar-transaction-item">Gestión</Link>
                 <Link to="/configuracion" className="navbar-transaction-item">Configuración</Link>
