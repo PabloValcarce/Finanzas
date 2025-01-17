@@ -14,7 +14,7 @@ def handle_transactions(current_user):
             'description': transaction.description,
             'amount': transaction.amount,
             'user_id': transaction.user_id,
-            'date': transaction.date
+            'date': transaction.date.isoformat() if transaction.date else None
         } for transaction in transactions])
     
     if request.method == 'POST':

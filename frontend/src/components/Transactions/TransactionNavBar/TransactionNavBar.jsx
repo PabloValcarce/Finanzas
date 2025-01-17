@@ -24,7 +24,7 @@ const NavBarTransaction = () => {
             </div>
             <div className={`navbar-transaction-menu ${isMenuOpen ? 'open' : ''}`}>
                 <Link to="/investment" className="navbar-transaction-item">Inversion</Link>
-                <Link to="/savings" className="navbar-transaction-item">Ahorro</Link>
+                <Link to="savings" className="navbar-transaction-item">Ahorro</Link>
                 <Link to="/estadisticas" className="navbar-transaction-item">Estadísticas</Link>
                 <Link to="/gestion" className="navbar-transaction-item">Gestión</Link>
                 <Link to="/configuracion" className="navbar-transaction-item">Configuración</Link>

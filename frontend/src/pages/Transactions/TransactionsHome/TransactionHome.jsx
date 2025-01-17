@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import NavBarTransaction from '../../../components/Transactions/TransactionNavBar/TransactionNavBar';
-import './Transaction.css'; 
+import './TransactionHome.css'; 
 import TransactionsList from '../../../components/Transactions/TransactionsList/TransactionsList';
 import AddTransaction from '../../../components/Transactions/TransactionAdd/TransactionAdd';
-import { useTransactions } from '../../../context/TransactionContext';  // Importamos el hook useTransactions
+import { useTransactions } from '../../../context/TransactionContext';
 
 function Transaction() {
     const { transactions, loadTransactions } = useTransactions();
-    const userId = localStorage.getItem('userId'); // Obtienes el ID del usuario del localStorage
+    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         loadTransactions();

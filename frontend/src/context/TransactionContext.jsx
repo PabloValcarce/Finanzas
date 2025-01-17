@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useCallback } from 'react';
 import api from '../services/api';
 
 // Crear el contexto
@@ -14,7 +14,7 @@ export const TransactionsProvider = ({ children }) => {
     };
 
     // Método para cargar las transacciones desde la API
-    const loadTransactions = async () => {
+    const loadTransactions = useCallback(async () => {
         try {
             const response = await api.get('/api/transactions', {
                 headers: {
@@ -25,7 +25,7 @@ export const TransactionsProvider = ({ children }) => {
         } catch (error) {
             console.error('Failed to load transactions:', error);
         }
-    };
+    },[]);
 
     return (
         <TransactionsContext.Provider value={{ transactions, updateTransactions, loadTransactions }}>

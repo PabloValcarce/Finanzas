@@ -1,0 +1,34 @@
+.savings-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.savings-page h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.savings-page p {
+    font-size: 18px;
+    color: #27ae60;
+}
+
+.savings-page ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.savings-page li {
+    background: #f8f9fa;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.savings-content{
+    margin-top:100px;
+}
+.savings-line-chart{
+    width: 500px;
+    height: auto;
+}
