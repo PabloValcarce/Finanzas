@@ -15,89 +15,87 @@ ChartJS.register(
 );
 
 function SavingsLineChart({ transactions }) {
-    // Se obtiene el nombre del mes (sin año) de las transacciones
+    // Prepara los datos y colores por adelantado en lugar de dentro de los callbacks
     const months = useMemo(() => {
-        // Creamos un arreglo de los meses únicos sin año
         return [...new Set(transactions.map(transaction => new Date(transaction.date).toLocaleString('default', { month: 'long' })))]
     }, [transactions]);
 
-    // Crea los datos para la gráfica
-    const data = useMemo(() => {
-        // Crea un objeto de balance por mes
-        const balanceByMonth = months.map(month => {
+    const balanceByMonth = useMemo(() => {
+        return months.map(month => {
             const filteredTransactions = transactions.filter(transaction => {
                 const transactionMonth = new Date(transaction.date).toLocaleString('default', { month: 'long' });
                 return transactionMonth === month;
             });
-            // Sumar el balance para ese mes
             return filteredTransactions.reduce((sum, transaction) => sum + transaction.amount, 0);
         });
+    }, [transactions, months]);
 
+    // Configuración del gráfico
+    const data = useMemo(() => {
         return {
-            labels: months, // Los meses como etiquetas (sin año)
+            labels: months,
             datasets: [
                 {
                     label: 'Ahorro por Mes',
-                    data: balanceByMonth, // Balance por mes
-                    borderColor: '#87CEFA', // Línea azul clara
-                    backgroundColor: '#FF4500',
-                    fill: true,
-                    tension: 0.5, // Curvatura de la línea
-                    pointBorderColor: 'rgba(75,192,192,1)', // Puntos de la línea
-                    pointBackgroundColor: '#FF4500',
+                    data: balanceByMonth,
+                    borderColor: '#87CEFA',
+                    fill: {
+                        target: 'origin',
+                        above: '#28A745',
+                        below: '#DC3545',
+                    },
+                    tension: 0.5,
+                    pointBorderColor: 'rgba(75,192,192,1)',
                 },
             ],
         };
-    }, [transactions, months]);
+    }, [months, balanceByMonth]);
 
     const options = {
         plugins: {
             legend: {
-              labels: {
-                color: '#FF4500',
-                font: {
-                  size: 16,
-                   // Cambiar tamaño de las etiquetas de la leyenda
+                labels: {
+                    color: '#f0c8a5',
+                    font: {
+                        size: 20,
+                    },
                 },
-              },
             },
             tooltip: {
-              bodyFont: {
-                size: 14, // Cambiar tamaño del texto en los tooltips
-              },
+                bodyFont: {
+                    size: 16,
+                },
             },
-          },
+        },
         scales: {
             y: {
-                // No limitamos el valor mínimo del eje Y
                 beginAtZero: false,
                 ticks: {
-                    color: '#FF4500',
+                    color: '#f0c8a5',
                     font: {
                         size: 14,
                         family: 'Montserrat',
-                        weight: 'bold'
-                    }
-                }
+                        weight: 'bold',
+                    },
+                },
             },
             x: {
-                // No limitamos el valor mínimo del eje Y
                 beginAtZero: false,
                 ticks: {
-                    color: '#FF4500',
+                    color: '#f0c8a5',
                     font: {
                         size: 14,
                         family: 'Montserrat',
-                        weight: 'bold'
-                    }
-                }
+                        weight: 'bold',
+                    },
+                },
             },
         },
     };
 
     return (
         <>
-            <Line data={data} style={{height: '100%',width: '100%'}} options={options} />
+            <Line data={data} style={{height: '100%', width: '100%'}} options={options} />
         </>
     );
 }
