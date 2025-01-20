@@ -44,7 +44,7 @@ function SavingsLineChart({ transactions }) {
             labels: months,
             datasets: [
                 {
-                    label: 'Ahorro por Mes',
+                    label: 'Ahorro por mes',
                     data: balanceByMonth,
                     borderColor: '#87CEFA',
                     fill: {

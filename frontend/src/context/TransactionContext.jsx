@@ -26,9 +26,21 @@ export const TransactionsProvider = ({ children }) => {
             console.error('Failed to load transactions:', error);
         }
     },[]);
+   // Función para agregar una nueva transacción
+   const addTransaction = async (newTransaction) => {
+    try {
+        // Enviar la transacción al backend
+        await api.post('/api/transactions', newTransaction);
+
+        // Actualiza el estado de las transacciones después de añadir una nueva
+        setTransactions((prevTransactions) => [...prevTransactions, newTransaction]);
+    } catch (error) {
+        console.error('Error adding transaction:', error);
+    }
+};
 
     return (
-        <TransactionsContext.Provider value={{ transactions, updateTransactions, loadTransactions }}>
+        <TransactionsContext.Provider value={{ transactions, updateTransactions, loadTransactions, addTransaction }}>
             {children}
         </TransactionsContext.Provider>
     );

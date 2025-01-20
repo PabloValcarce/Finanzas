@@ -1,6 +1,7 @@
 import React from 'react';
+import './TransactionsResults.css';
 
-function TransactionsList({ transactions }) {
+function TransactionsResults({ transactions }) {
     return (
         <div className="transactions-container">
             <h1>Transactions</h1>
@@ -17,4 +18,4 @@ function TransactionsList({ transactions }) {
     );
 }
 
-export default TransactionsList;
+export default TransactionsResults;

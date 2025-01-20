@@ -4,8 +4,10 @@ import Dashboard from './pages/Home/Dashboard';
 import Transactions from './pages/Transactions/TransactionsHome/TransactionHome';
 import { TransactionsProvider } from './context/TransactionContext'; // Contexto de transacciones
 import SavingsPage from './pages/Transactions/Savings/SavingsPage';
+import TransactionsList from './pages/Transactions/TransactionsList/TransactionsList';
 
 function App() {
+
   return (
     <Router>
       <Routes>
@@ -16,10 +18,11 @@ function App() {
         <Route
           path="/*"
           element={
-            <TransactionsProvider> {/* Contexto envuelto aquí */}
+            <TransactionsProvider> {/* Contexto */}
               <Routes>
                 <Route path="/transactions" element={<Transactions />} />
-                <Route path="transactions/savings" element={<SavingsPage />} />
+                <Route path="/transactions/savings" element={<SavingsPage />} />
+                <Route path="/transactions/list" element={<TransactionsList />} />
               </Routes>
             </TransactionsProvider>
           }

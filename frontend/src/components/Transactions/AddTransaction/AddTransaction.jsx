@@ -1,11 +1,9 @@
 import React from 'react';
 import Swal from 'sweetalert2';
-import api from '../../../services/api';
-import { useTransactions } from '../../../context/TransactionContext';
+import { useTransactions } from '../../../context/TransactionContext';  // Importa el hook de contexto
 
-const AddTransaction = ({ userId, onTransactionAdded }) => {
-
-    const{addTransaction} = useTransactions();
+const AddTransaction = ({ userId }) => {
+    const { addTransaction } = useTransactions();  // Obtén la función addTransaction desde el contexto
 
     const handleAddTransaction = async () => {
         const { value: formValues } = await Swal.fire({
@@ -24,18 +22,18 @@ const AddTransaction = ({ userId, onTransactionAdded }) => {
 
         if (formValues) {
             const [description, amount] = formValues;
+
+            // Crear el objeto de la nueva transacción
+            const newTransaction = {
+                description,
+                amount,
+                user_id: userId,
+            };
+
             try {
-                await api.post('/api/transactions', {
-                    description,
-                    amount,
-                    user_id: userId
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`, // Asegúrate de enviar el token
-                    },
-                });
-                onTransactionAdded();
+                // Llamar a addTransaction desde el contexto para agregar la nueva transacción
+                await addTransaction(newTransaction);
+
                 Swal.fire('Success', 'Transaction added successfully!', 'success');
             } catch (error) {
                 Swal.fire('Error', 'Failed to add transaction.', 'error');

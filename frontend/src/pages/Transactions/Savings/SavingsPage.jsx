@@ -5,8 +5,10 @@ import './SavingsPage.css';
 import NavBarTransaction from '../../../components/Transactions/TransactionNavBar/TransactionNavBar';
 import SavingsLineChart from '../../../components/Graphs/Savings/LineChart/SavingsLineChart';
 import SavingsCircularChart from '../../../components/Graphs/Savings/CircularChart/SavingsCircularChart';
+import useAuth  from '../../../hooks/useAuth';  // Importa el hook useAuth
 
 function SavingsPage() {
+  useAuth();
   const { transactions, loadTransactions } = useTransactions();  // Accedemos a las transacciones del contexto
 
   // Si las transacciones no están cargadas, las cargamos
