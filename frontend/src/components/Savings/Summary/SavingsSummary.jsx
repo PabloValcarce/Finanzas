@@ -14,15 +14,6 @@ function SavingsSummary({ transactions }) {
         <div>
             <h1>Total Savings</h1>
             <p>Your total savings: ${totalSavings.toFixed(2)}</p>
-
-            <h2>All Transactions</h2>
-            <ul>
-                {transactions.map(transaction => (
-                    <li key={transaction.id}>
-                        {transaction.description} - ${transaction.amount.toFixed(2)}
-                    </li>
-                ))}
-            </ul>
         </div>
     );
 }

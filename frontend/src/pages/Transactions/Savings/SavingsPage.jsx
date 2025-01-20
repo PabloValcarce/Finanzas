@@ -4,6 +4,7 @@ import SavingsSummary from '../../../components/Savings/Summary/SavingsSummary';
 import './SavingsPage.css';
 import NavBarTransaction from '../../../components/Transactions/TransactionNavBar/TransactionNavBar';
 import SavingsLineChart from '../../../components/Graphs/Savings/LineChart/SavingsLineChart';
+import SavingsCircularChart from '../../../components/Graphs/Savings/CircularChart/SavingsCircularChart';
 
 function SavingsPage() {
   const { transactions, loadTransactions } = useTransactions();  // Accedemos a las transacciones del contexto
@@ -20,10 +21,15 @@ function SavingsPage() {
     <div className="savings-page">
       <NavBarTransaction />
       <div className="savings-content">
-        <div className='savings-line-chart'>
-          <SavingsLineChart transactions={transactions} />
-        </div>
         <SavingsSummary transactions={transactions} />
+        <div className="graphs">
+          <div className='savings-line-chart'>
+            <SavingsLineChart transactions={transactions} />
+          </div>
+          <div className="savings-circular-chart">
+            <SavingsCircularChart transactions={transactions} />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -15,15 +15,23 @@ ChartJS.register(
 );
 
 function SavingsLineChart({ transactions }) {
-    // Prepara los datos y colores por adelantado en lugar de dentro de los callbacks
+    // Función para capitalizar la primera letra
+    const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1);
+
+    // Prepara los datos y colores por adelantado
     const months = useMemo(() => {
-        return [...new Set(transactions.map(transaction => new Date(transaction.date).toLocaleString('default', { month: 'long' })))]
+        const rawMonths = transactions.map(transaction =>
+            new Date(transaction.date).toLocaleString('default', { month: 'long' })
+        );
+        return [...new Set(rawMonths)].map(capitalize);
     }, [transactions]);
 
     const balanceByMonth = useMemo(() => {
         return months.map(month => {
             const filteredTransactions = transactions.filter(transaction => {
-                const transactionMonth = new Date(transaction.date).toLocaleString('default', { month: 'long' });
+                const transactionMonth = capitalize(
+                    new Date(transaction.date).toLocaleString('default', { month: 'long' })
+                );
                 return transactionMonth === month;
             });
             return filteredTransactions.reduce((sum, transaction) => sum + transaction.amount, 0);
@@ -64,7 +72,14 @@ function SavingsLineChart({ transactions }) {
             tooltip: {
                 bodyFont: {
                     size: 16,
+                    family: 'Montserrat',
+                    weight: 'bold',
+                    color: '#f0c8a5',
                 },
+                bodyColor: '#f0c8a5', // Cambia el color del texto que imprime la cantidad
+                backgroundColor: '#1A5A8F', // Fondo del tooltip
+                borderColor: '#f0c8a5', // Borde del tooltip
+                borderWidth: 1,
             },
         },
         scales: {
@@ -95,7 +110,7 @@ function SavingsLineChart({ transactions }) {
 
     return (
         <>
-            <Line data={data} style={{height: '100%', width: '100%'}} options={options} />
+            <Line data={data} style={{ height: '100%', width: '100%' }} options={options} />
         </>
     );
 }
