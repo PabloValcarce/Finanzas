@@ -60,12 +60,14 @@ function SavingsLineChart({ transactions }) {
     }, [months, balanceByMonth]);
 
     const options = {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 labels: {
-                    color: '#f0c8a5',
+                    color: 'white',
                     font: {
-                        size: 20,
+                        size: 14,
                     },
                 },
             },
@@ -77,7 +79,7 @@ function SavingsLineChart({ transactions }) {
                     color: '#f0c8a5',
                 },
                 bodyColor: '#f0c8a5', // Cambia el color del texto que imprime la cantidad
-                backgroundColor: '#1A5A8F', // Fondo del tooltip
+                backgroundColor: '#1A5A8', // Fondo del tooltip
                 borderColor: '#f0c8a5', // Borde del tooltip
                 borderWidth: 1,
             },
@@ -88,7 +90,7 @@ function SavingsLineChart({ transactions }) {
                 ticks: {
                     color: '#f0c8a5',
                     font: {
-                        size: 14,
+                        size: 12,
                         family: 'Montserrat',
                         weight: 'bold',
                     },
@@ -99,7 +101,7 @@ function SavingsLineChart({ transactions }) {
                 ticks: {
                     color: '#f0c8a5',
                     font: {
-                        size: 14,
+                        size: 12,
                         family: 'Montserrat',
                         weight: 'bold',
                     },

@@ -1,9 +1,8 @@
-// utils/auth.js
-
 export const isTokenValid = () => {
     const token = localStorage.getItem('token');
     
     if (!token) {
+        window.location.href = '/';
         return false;  // Si no hay token, no está autenticado
     }
 

@@ -1,0 +1,37 @@
+.add {
+    background-color: #ffffff; /* Fondo blanco */
+    color: var(--primary-color); /* Texto oscuro para contraste */
+    border: 3px solid var(--primary-color) ; /* Borde con un color verde */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px 10px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño del texto */
+    font-weight: bold; /* Texto en negrita */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+    transition: all 0.3s ease; /* Transición suave para los efectos */
+  }
+  
+  .add:hover {
+    background-color: #3569A3; /* Cambia el fondo a verde al pasar el cursor */
+    color: #ffffff; /* Texto blanco para contraste */
+    transform: translateY(-3px); /* Efecto de elevación */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para efecto flotante */
+  }
+  
+  .add:active {
+    transform: translateY(0); /* Restaura la posición al hacer clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra más tenue */
+  }
+  .swal2-input {
+    width: 100%; /* Asegura que el input y el select ocupen todo el ancho */
+    margin:0 auto;
+    font-size: 16px;
+    margin-top: 10px; /* Espaciado entre los inputs */
+}
+
+/* Si deseas estilizar específicamente el <select> */
+#swal-select {
+    border: 1px solid #ddd; /* Borde del select */
+    border-radius: 4px; /* Bordes redondeados */
+    background-color: #f8f8f8; /* Fondo del select */
+}
+  

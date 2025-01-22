@@ -56,7 +56,10 @@ function AuthForm() {
                 // Asegúrate de que la respuesta contiene el token
              if (response.data.token) {
                 const token = response.data.token;
-                localStorage.setItem('token', token);  // Guarda el token en localStorage
+                const userId = response.data.userId;
+                
+                localStorage.setItem('token', token);
+                localStorage.setItem('userId',userId);  // Guarda el token en localStorage
 
                 // Si el token se ha guardado correctamente, navega a /transactions
                 navigate('/transactions');

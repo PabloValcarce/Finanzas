@@ -34,4 +34,5 @@ def login():
     },SECRET_KEY , algorithm='HS256')
     
     
-    return jsonify({"token": token})
+    return jsonify({"token": token,
+        "userId": user.id})

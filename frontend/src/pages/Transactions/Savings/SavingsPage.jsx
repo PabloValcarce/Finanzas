@@ -5,27 +5,25 @@ import './SavingsPage.css';
 import NavBarTransaction from '../../../components/Transactions/TransactionNavBar/TransactionNavBar';
 import SavingsLineChart from '../../../components/Graphs/Savings/LineChart/SavingsLineChart';
 import SavingsCircularChart from '../../../components/Graphs/Savings/CircularChart/SavingsCircularChart';
-import useAuth  from '../../../hooks/useAuth';  // Importa el hook useAuth
+import useAuth from '../../../hooks/useAuth'; // Importa el hook useAuth
 
 function SavingsPage() {
-  useAuth();
-  const { transactions, loadTransactions } = useTransactions();  // Accedemos a las transacciones del contexto
+  useAuth(); // Verifica la autenticación del usuario
+  const { transactions, loadTransactions } = useTransactions(); // Accedemos a las transacciones del contexto
 
-  // Si las transacciones no están cargadas, las cargamos
+  // Cargar transacciones al montar el componente
   useEffect(() => {
-    if (transactions.length === 0) {
-      loadTransactions();
-    }
-  }, [transactions, loadTransactions]);
+    loadTransactions(); // Llama a la API una sola vez al montar el componente
+  }, [loadTransactions]);
 
-  // Renderiza las transacciones solo si están disponibles
+  // Renderiza la página con transacciones
   return (
     <div className="savings-page">
       <NavBarTransaction />
       <div className="savings-content">
         <SavingsSummary transactions={transactions} />
         <div className="graphs">
-          <div className='savings-line-chart'>
+          <div className="savings-line-chart">
             <SavingsLineChart transactions={transactions} />
           </div>
           <div className="savings-circular-chart">
