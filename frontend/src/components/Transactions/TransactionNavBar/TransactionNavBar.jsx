@@ -25,9 +25,9 @@ const NavBarTransaction = () => {
             <div className={`navbar-transaction-menu ${isMenuOpen ? 'open' : ''}`}>
                 <Link to="/transactions/investment" className="navbar-transaction-item">Inversion</Link>
                 <Link to="/transactions/savings" className="navbar-transaction-item">Ahorro</Link>
+                <Link to="/transactions/spent" className="navbar-transaction-item">Gastos</Link>
                 <Link to="/transactions/List" className="navbar-transaction-item">Transacciones</Link>
                 <Link to="/transactions/estadisticas" className="navbar-transaction-item">Estadísticas</Link>
-                <Link to="/transactions/gestion" className="navbar-transaction-item">Gestión</Link>
                 <Link to="/transactions/configuracion" className="navbar-transaction-item">Configuración</Link>
                 <button onClick={handleLogout} className="navbar-transaction-item logout-button">
                     <FontAwesomeIcon icon={faSignOutAlt} />

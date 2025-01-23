@@ -1,6 +1,7 @@
 .savings-page {
     padding: 20px;
-    font-family: Arial, sans-serif;
+    height: 100vh ;
+    width: 100vw;
 }
 
 .savings-page h1 {
@@ -33,16 +34,27 @@
 .savings-content{
     display: flex;
     flex-direction: column;
-    gap:10vh;
-    width: 90vw;
-    height: 80vh;
+    gap:50px;
+    width:100%;
+    height: calc(100vh - 100px);
     border-radius: 3%;
+    margin-top: 75px;
 }
 .graphs{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    gap: 10vh;
+    gap: 50px;
+    height: auto;
+    width: auto;
 }
-
+.savings-line-chart{
+    width: auto;
+    height:300px;
+}
+.savings-circular-chart{
+    width: auto;
+    height: 300px;
+    margin-bottom: 150px;
+}

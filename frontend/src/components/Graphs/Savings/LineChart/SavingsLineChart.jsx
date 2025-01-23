@@ -18,13 +18,24 @@ function SavingsLineChart({ transactions }) {
     // Función para capitalizar la primera letra
     const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1);
 
+    // Mover la constante MONTHS_ORDER dentro de useMemo para evitar que cause cambios en las dependencias
+    const monthsOrder = useMemo(() => [
+        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ], []); // Esta constante no tiene dependencias, por lo tanto, solo se calcula una vez
+
     // Prepara los datos y colores por adelantado
     const months = useMemo(() => {
         const rawMonths = transactions.map(transaction =>
             new Date(transaction.date).toLocaleString('default', { month: 'long' })
         );
-        return [...new Set(rawMonths)].map(capitalize);
-    }, [transactions]);
+        const uniqueMonths = [...new Set(rawMonths)].map(capitalize);
+
+        // Ordena los meses según monthsOrder
+        return uniqueMonths.sort(
+            (a, b) => monthsOrder.indexOf(a) - monthsOrder.indexOf(b)
+        );
+    }, [transactions, monthsOrder]);
 
     const balanceByMonth = useMemo(() => {
         return months.map(month => {
@@ -42,8 +53,7 @@ function SavingsLineChart({ transactions }) {
     const data = useMemo(() => {
         return {
             labels: months,
-            datasets: [
-                {
+            datasets: [{
                     label: 'Ahorro por mes',
                     data: balanceByMonth,
                     borderColor: '#87CEFA',
@@ -54,6 +64,10 @@ function SavingsLineChart({ transactions }) {
                     },
                     tension: 0.5,
                     pointBorderColor: 'rgba(75,192,192,1)',
+                    pointBackgroundColor: 'rgba(75,192,192,1)', // Asegura que los puntos no muestren valores
+                    pointRadius: 5, // Controla el tamaño de los puntos
+                    pointHoverRadius: 7, // Radio de los puntos al pasar el mouse
+                    pointHoverBorderWidth: 2,
                 },
             ],
         };
@@ -72,15 +86,16 @@ function SavingsLineChart({ transactions }) {
                 },
             },
             tooltip: {
+                enabled: true,
                 bodyFont: {
                     size: 16,
                     family: 'Montserrat',
                     weight: 'bold',
                     color: '#f0c8a5',
                 },
-                bodyColor: '#f0c8a5', // Cambia el color del texto que imprime la cantidad
-                backgroundColor: '#1A5A8', // Fondo del tooltip
-                borderColor: '#f0c8a5', // Borde del tooltip
+                bodyColor: '#f0c8a5',
+                backgroundColor: '#1A5A8',
+                borderColor: '#f0c8a5',
                 borderWidth: 1,
             },
         },
