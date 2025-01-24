@@ -1,0 +1,47 @@
+.spent-results {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .spent-results-title {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    text-align: center;
+  }
+  
+  .spent-results-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .spent-results-table th,
+  .spent-results-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  .spent-results-table th {
+    background-color: #f0f0f0;
+    color: #555;
+  }
+  
+  .spent-results-table tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
+  }
+  
+  .spent-results-table tbody tr:hover {
+    background-color: #eaeaea;
+  }
+  
+  .spent-results-no-expenses {
+    margin-top: 10px;
+    text-align: center;
+    color: #888;
+    font-size: 1rem;
+  }
+  

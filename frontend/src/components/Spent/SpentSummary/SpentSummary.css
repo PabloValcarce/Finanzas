@@ -1,0 +1,8 @@
+.spent-summary-title {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+.spent-summary-text {
+    font-size: 18px;
+    color: var(--button-color);
+}

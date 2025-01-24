@@ -10,6 +10,8 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 1000;
+
 }
 
 .navbar-transaction-item-brand{
@@ -21,6 +23,7 @@
 .navbar-transaction-menu {
     display: flex;
     gap: 20px;
+    z-index: 1010;
 }
 
 .navbar-transaction-item {

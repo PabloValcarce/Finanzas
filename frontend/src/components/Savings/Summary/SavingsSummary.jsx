@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import './SavingsSummary.css';
 
 function SavingsSummary({ transactions }) {
     const totalSavings = useMemo(() => {
@@ -12,8 +13,8 @@ function SavingsSummary({ transactions }) {
 
     return (
         <div>
-            <h1>Total Savings</h1>
-            <p>Your total savings: ${totalSavings.toFixed(2)}</p>
+            <h1 className='saving-summary-title'>Total Ahorrado</h1>
+            <p className='saving-summary-text'>Tu dinero ahorrado: ${totalSavings.toFixed(2)}</p>
         </div>
     );
 }

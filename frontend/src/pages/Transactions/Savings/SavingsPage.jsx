@@ -22,11 +22,12 @@ function SavingsPage() {
       <NavBarTransaction />
       <div className="savings-content">
         <SavingsSummary transactions={transactions} />
-        <div className="graphs">
+        <div className="savings-graphs">
           <div className="savings-line-chart">
             <SavingsLineChart transactions={transactions} />
           </div>
           <div className="savings-circular-chart">
+            <h1 className="savings-circular-chart-title">Ahorro este mes</h1>
             <SavingsCircularChart transactions={transactions} />
           </div>
         </div>
