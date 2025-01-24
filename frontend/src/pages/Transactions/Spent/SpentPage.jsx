@@ -22,16 +22,12 @@ function SpentPage() {
     loadTransactions();
   }, [loadTransactions]);
 
-  console.log("All Transactions:", transactions);
-
   const handleStartDateChange = (date) => {
     setStartDate(date);
-    console.log("Start Date selected:", date);
   };
 
   const handleEndDateChange = (date) => {
     setEndDate(date);
-    console.log("End Date selected:", date);
   };
 
   const normalizeDate = (date) => {

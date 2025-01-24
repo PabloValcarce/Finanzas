@@ -1,47 +1,80 @@
-.spent-results {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Contenedor para la tabla con desplazamiento horizontal */
+.spent-results-table-wrapper {
+  width: 100%;
+  overflow-x: auto;  /* Habilita el desplazamiento horizontal */
+  -webkit-overflow-scrolling: touch; /* Mejora la experiencia en dispositivos móviles */
+  padding: 0 10px; /* Espaciado adicional */
+}
+
+/* Estilo de la tabla */
+.spent-results-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto; /* Permite a las columnas ajustarse al contenido */
+}
+
+.spent-results-table th,
+.spent-results-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.spent-results-table th {
+  background-color: #f0f0f0;
+  color: var(--primary-color);
+}
+
+.spent-results-table td {
+  min-width: 150px;  /* Asegura que cada celda tenga un tamaño mínimo para evitar superposiciones */
+}
+
+.spent-results-table tbody tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+.spent-results-table tbody tr:hover {
+  background-color: #eaeaea;
+}
+
+/* Mensaje si no hay gastos */
+.spent-results-no-expenses {
+  margin-top: 10px;
+  text-align: center;
+  color: #888;
+  font-size: 1rem;
+}
+
+/* Título de la sección de resultados */
+.spent-results-title {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 600px) {
+  .spent-results-table-wrapper {
+    padding: 0 10px; /* Aseguramos un pequeño espaciado */
   }
-  
-  .spent-results-title {
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    text-align: center;
-  }
-  
-  .spent-results-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
+
   .spent-results-table th,
   .spent-results-table td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
+    font-size: 0.9rem; /* Reducimos el tamaño de la fuente en pantallas pequeñas */
+    min-width: 120px; /* Ajustamos el tamaño mínimo de las celdas para pantallas más pequeñas */
   }
-  
-  .spent-results-table th {
-    background-color: #f0f0f0;
-    color: #555;
+}
+
+/* Media Query para pantallas más pequeñas que 450px */
+@media (max-width: 450px) {
+  .spent-results-table-wrapper {
+    padding: 0 8px; /* Espaciado aún más pequeño */
   }
-  
-  .spent-results-table tbody tr:nth-child(even) {
-    background-color: #f7f7f7;
+
+  .spent-results-table th,
+  .spent-results-table td {
+    font-size: 0.8rem; /* Reducimos aún más el tamaño de la fuente */
+    min-width: 100px; /* Ajustamos el tamaño mínimo de las celdas para pantallas más pequeñas */
   }
-  
-  .spent-results-table tbody tr:hover {
-    background-color: #eaeaea;
-  }
-  
-  .spent-results-no-expenses {
-    margin-top: 10px;
-    text-align: center;
-    color: #888;
-    font-size: 1rem;
-  }
-  
+}
