@@ -37,8 +37,8 @@ function SavingsCircularChart({ transactions }) {
                 {
                     label: 'Distribución de gastos y ahorros',
                     data: [totals.spent, totals.saved],
-                    backgroundColor: ['#DC3545', '#28A745'], // Colores personalizados
-                    hoverBackgroundColor: ['#DC3545AA', '#5CD85F'], // Colores al pasar el ratón
+                    backgroundColor: ['#F5A167', '#70BFF5'], 
+                    hoverBackgroundColor: ['#f3b381', '#87CEFA'], 
                     borderWidth: 1,
                 },
             ],
@@ -47,11 +47,11 @@ function SavingsCircularChart({ transactions }) {
 
     const options = {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         plugins: {
             legend: {
                 labels: {
-                    color: '#f0c8a5',
+                    color: '#1B3A57',
                     font: {
                         size: 16,
                         family: 'Montserrat',

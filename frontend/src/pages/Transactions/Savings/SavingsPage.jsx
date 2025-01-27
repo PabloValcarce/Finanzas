@@ -1,34 +1,60 @@
-import React, { useEffect } from 'react';
-import { useTransactions } from '../../../context/TransactionContext'; // Asegúrate de importar el hook de contexto
+import React, { useEffect, useState } from 'react';
+import { useTransactions } from '../../../context/TransactionContext';
 import SavingsSummary from '../../../components/Savings/Summary/SavingsSummary';
 import './SavingsPage.css';
 import NavBarTransaction from '../../../components/Transactions/TransactionNavBar/TransactionNavBar';
 import SavingsLineChart from '../../../components/Graphs/Savings/LineChart/SavingsLineChart';
 import SavingsCircularChart from '../../../components/Graphs/Savings/CircularChart/SavingsCircularChart';
-import useAuth from '../../../hooks/useAuth'; // Importa el hook useAuth
+import useAuth from '../../../hooks/useAuth';
+import DateRangePicker from '../../../components/DateRangePicker/DateRangePicker';
 
 function SavingsPage() {
-  useAuth(); // Verifica la autenticación del usuario
-  const { transactions, loadTransactions } = useTransactions(); // Accedemos a las transacciones del contexto
+  useAuth();
+  const { transactions, loadTransactions } = useTransactions();
+  const [dateRange, setDateRange] = useState({ startDate: null, endDate: null });
 
-  // Cargar transacciones al montar el componente
   useEffect(() => {
-    loadTransactions(); // Llama a la API una sola vez al montar el componente
+    loadTransactions();
   }, [loadTransactions]);
 
-  // Renderiza la página con transacciones
+  const filterTransactionsByDate = () => {
+    const { startDate, endDate } = dateRange;
+    if (!startDate || !endDate) return transactions;
+
+    return transactions.filter((transaction) => {
+      const transactionDate = new Date(transaction.date);
+      return transactionDate >= startDate && transactionDate <= endDate;
+    });
+  };
+
+  const handleResetDates = () => {
+    setDateRange({ startDate: null, endDate: null });
+  };
+
+  const filteredTransactions = filterTransactionsByDate();
+
   return (
     <div className="savings-page">
       <NavBarTransaction />
       <div className="savings-content">
-        <SavingsSummary transactions={transactions} />
-        <div className="savings-graphs">
-          <div className="savings-line-chart">
-            <SavingsLineChart transactions={transactions} />
-          </div>
-          <div className="savings-circular-chart">
-            <h1 className="savings-circular-chart-title">Ahorro este mes</h1>
-            <SavingsCircularChart transactions={transactions} />
+        <div className="date-filter">
+          <label htmlFor="date-range">Filtro entre fechas :</label>
+          <DateRangePicker
+            startDate={dateRange.startDate}
+            endDate={dateRange.endDate}
+            onDateRangeChange={setDateRange}
+            onReset={handleResetDates}
+          />
+        </div>
+        <div className="savings-data">
+          <SavingsSummary transactions={filteredTransactions} />
+          <div className="savings-graphs">
+            <div className="savings-line-chart">
+              <SavingsLineChart transactions={filteredTransactions} />
+            </div>
+            <div className="savings-circular-chart">
+              <SavingsCircularChart transactions={transactions} />
+            </div>
           </div>
         </div>
       </div>

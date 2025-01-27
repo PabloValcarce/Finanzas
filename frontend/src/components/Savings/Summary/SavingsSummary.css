@@ -1,8 +1,8 @@
 .saving-summary-title {
-    color: #f8f9fa;
+    color: var(--primary-color);
     margin-bottom: 10px;
 }
 .saving-summary-text {
     font-size: 18px;
-    color: #28A745;
+    color: var(--button-color);
 }

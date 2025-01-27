@@ -1,59 +1,79 @@
-.transactions-container{
-    background-color: white;
-    width: 90vw;
-    border-radius: 3%;
-    padding:30px;
-}
-
-
-.transactions-container h1 {
-    text-align: left;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-}
-
-.transactions-table {
-    margin-top: 20px;
-    overflow-x: auto;
-}
-
-table {
+/* Contenedor para la tabla con desplazamiento horizontal */
+.transactions-results-table-wrapper {
+    width: 100%;
+    overflow-x: auto;  /* Habilita el desplazamiento horizontal */
+    -webkit-overflow-scrolling: touch; /* Mejora la experiencia en dispositivos móviles */
+    padding: 0 10px; /* Espaciado adicional */
+  }
+  
+  /* Estilo de la tabla */
+  .transactions-results-table {
     width: 100%;
     border-collapse: collapse;
-}
-
-th, td {
-    border: 1px solid #ccc;
+    table-layout: auto; /* Permite a las columnas ajustarse al contenido */
+  }
+  
+  .transactions-results-table th,
+  .transactions-results-table td {
     padding: 10px;
     text-align: left;
-}
-
-th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-td {
-    font-size: 14px;
-}
-
-th {
-    font-size: 16px;
-}
-.negative-row {
-    background-color: rgba(255, 0, 0, 0.1); 
-    color: #d32f2f; 
-}
-
-.positive-row {
-    background-color: rgba(0, 255, 0, 0.1); 
-    color: #388e3c; 
-}
+    border: 1px solid #ddd;
+  }
+  
+  .transactions-results-table th {
+    background-color: #f0f0f0;
+    color: var(--primary-color);
+  }
+  
+  .transactions-results-table td {
+    min-width: 150px;  /* Asegura que cada celda tenga un tamaño mínimo para evitar superposiciones */
+  }
+  
+  .transactions-results-table tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
+  }
+  
+  .transactions-results-table tbody tr:hover {
+    background-color: #eaeaea;
+  }
+  
+  /* Mensaje si no hay gastos */
+  .transactions-results-no-expenses {
+    margin-top: 10px;
+    text-align: center;
+    color: #888;
+    font-size: 1rem;
+  }
+  
+  .transactions-results-title {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    text-align: center;
+  }
+  
+  @media (max-width: 600px) {
+    .transactions-results-table-wrapper {
+      padding: 0 10px; 
+    }
+  
+    .transactions-results-table th,
+    .transactions-results-table td {
+      font-size: 0.9rem; 
+      min-width: 120px;
+    }
+  }
+  
+  
+  @media (max-width: 450px) {
+    .transactions-results-table-wrapper {
+      padding: 0 8px; 
+    }
+  
+    .transactions-results-table th,
+    .transactions-results-table td {
+      font-size: 0.8rem; 
+      min-width: 100px; 
+    }
+  }
+  
